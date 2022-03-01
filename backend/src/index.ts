@@ -1,5 +1,6 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
+import {player} from "../../ipc/channels"
 
 const isDev = process.env.ENV !== "production";
 
@@ -13,7 +14,7 @@ const createWindow = () => {
     /**
      * Controllo di versione
      */
-    mainWindow.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../gui/build/index.html")}`);
+    mainWindow.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "./build/index.html")}`);
     mainWindow.on("closed", () => (mainWindow = null));
 };
 

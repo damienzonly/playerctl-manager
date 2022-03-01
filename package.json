@@ -11,14 +11,14 @@
         "react:build": "react-scripts build",
         "react:test": "react-scripts test",
         "react:eject": "react-scripts eject",
-        "electron:tsc": "tsc",
+        "electron:tsc": "cd backend && tsc",
         "electron:start": "yarn electron:tsc && electron dist",
         "electron:build": "electron-builder",
         "release": "npm run react:build && npm run electron-builder --publish=always",
         "build": "npm run react:build && npm run electron:build",
         "format": "prettier --write src *.json gui/src",
         "precommit": "yarn format",
-        "start": "concurrently \"cd gui && cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && yarn electron:start\""
+        "start": "concurrently \"cross-env BROWSER=none yarn react:start\" \"wait-on http://localhost:3000 && yarn electron:start\""
     },
     "devDependencies": {
         "@types/node": "^17.0.21",
@@ -28,10 +28,35 @@
         "prettier": "^2.5.1",
         "ts-node": "^10.5.0",
         "typescript": "^4.6.2",
+        "@types/react-dom": "^17.0.11",
+        "@types/react": "^17.0.39",
         "wait-on": "^6.0.1"
     },
     "dependencies": {
         "electron": "^17.1.0",
-        "log-lv": "^1.3.0"
+        "log-lv": "^1.3.0",
+        "react-router-dom": "^6.2.2",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "5.0.0",
+        "typescript": "^4.6.2"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
     }
 }
