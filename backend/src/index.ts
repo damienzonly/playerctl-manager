@@ -1,6 +1,6 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow } from "electron";
 import path from "path";
-import {player} from "../../ipc/channels"
+import { initializeIPC } from "./appServer";
 
 const isDev = process.env.ENV !== "production";
 
@@ -9,7 +9,11 @@ let mainWindow;
 const createWindow = () => {
     mainWindow = new BrowserWindow({
         width: 900,
-        height: 680
+        height: 680,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
     });
     /**
      * Controllo di versione
@@ -23,3 +27,5 @@ app.on("ready", createWindow)
     .on("activate", () => {
         mainWindow === null && createWindow();
     });
+
+initializeIPC()
