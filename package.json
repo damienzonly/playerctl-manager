@@ -1,0 +1,37 @@
+{
+    "name": "playerctl-manager",
+    "version": "1.0.0",
+    "description": "GUI for playerctl",
+    "main": "index.js",
+    "repository": "git@github.com:damienzonly/playerctl-manager.git",
+    "author": "damianomailswork@gmail.com",
+    "license": "MIT",
+    "scripts": {
+        "react:start": "react-scripts start",
+        "react:build": "react-scripts build",
+        "react:test": "react-scripts test",
+        "react:eject": "react-scripts eject",
+        "electron:tsc": "tsc",
+        "electron:start": "yarn electron:tsc && electron dist",
+        "electron:build": "electron-builder",
+        "release": "npm run react:build && npm run electron-builder --publish=always",
+        "build": "npm run react:build && npm run electron:build",
+        "format": "prettier --write src *.json gui/src",
+        "precommit": "yarn format",
+        "start": "concurrently \"cd gui && cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && yarn electron:start\""
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.21",
+        "concurrently": "^7.0.0",
+        "cross-env": "^7.0.3",
+        "electron-builder": "^22.14.13",
+        "prettier": "^2.5.1",
+        "ts-node": "^10.5.0",
+        "typescript": "^4.6.2",
+        "wait-on": "^6.0.1"
+    },
+    "dependencies": {
+        "electron": "^17.1.0",
+        "log-lv": "^1.3.0"
+    }
+}
