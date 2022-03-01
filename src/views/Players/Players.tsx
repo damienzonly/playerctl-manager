@@ -1,13 +1,24 @@
+import { Card, List } from "antd";
 import React, { useEffect, useState } from "react";
-import { PLAYERS_CHANNEL } from "../../channels";
 import { sendIPC } from "../../lib/ipc";
 
 export function Players() {
-    const [data, setData] = useState("default");
+    const [data, setData] = useState<string[]>([]);
 
     useEffect(() => {
-        sendIPC(PLAYERS_CHANNEL).then(setData)
-    })
+        sendIPC<string[]>("list_players").then(data => {
+            console.log("data", data)
+            setData(data)
+        })
+    }, [])
 
-    return <div>ciao {data}</div>
+    return <>
+        <Card>
+            <List
+                bordered
+                dataSource={data}
+                renderItem={item => <List.Item>{item}</List.Item>}
+            />
+        </Card>
+    </>
 }

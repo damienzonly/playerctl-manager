@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
 import { initializeIPC } from "./appServer";
+import { _spawnCommand, splitLines } from "./playerctl";
 
 const isDev = process.env.ENV !== "production";
 

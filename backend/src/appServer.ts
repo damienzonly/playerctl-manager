@@ -1,8 +1,12 @@
-import { PLAYERS_CHANNEL } from "./channels";
+import { PLAYERS_RESOURCE } from "./resources";
+import { makeCrudApis } from "./crud/crud";
 import { requestHandler } from "./ipc";
+import { listPlayers } from "./playerctl";
+
+const playersCrudApis = makeCrudApis(PLAYERS_RESOURCE);
 
 export function initializeIPC() {
-    requestHandler(PLAYERS_CHANNEL, () => {
-        return "giovanni"
+    requestHandler(playersCrudApis.list, async () => {
+        return listPlayers()
     })
 }
